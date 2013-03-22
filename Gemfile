@@ -52,8 +52,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.9.0'
   gem 'headless'
   unless ENV["CI"]
-    gem 'ruby-debug', :platform => :mri_18
-    gem 'debugger', :platform => :mri_19
+    #gem 'ruby-debug', :platform => :mri_18
+    #gem 'debugger', :platform => :mri_19
   end
   gem 'pry-rails'
 end
