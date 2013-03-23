@@ -17,6 +17,9 @@
 
 module FatFreeCRM
   class Engine < ::Rails::Engine
+    isolate_namespace FatFreeCRM
+    engine_name 'fat_free_crm'
+
     config.autoload_paths += Dir[root.join("app/models/**")] +
                              Dir[root.join("app/controllers/entities")]
 
