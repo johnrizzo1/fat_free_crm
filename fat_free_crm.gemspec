@@ -24,6 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'cocaine'
   gem.add_dependency 'paper_trail'
   gem.add_dependency 'devise'
+  gem.add_dependency 'devise-encryptable'
   gem.add_dependency 'acts_as_commentable', '~> 3.0.1'
   gem.add_dependency 'acts-as-taggable-on', '~> 2.3.3'
   gem.add_dependency 'dynamic_form'
