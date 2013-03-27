@@ -17,4 +17,4 @@
 
 # Set default locale from Settings
 
-I18n.default_locale = Setting.locale
+I18n.default_locale = FatFreeCrm::Setting.locale

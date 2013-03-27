@@ -1,5 +1,5 @@
-if defined?(FatFreeCRM::Application)
-  FatFreeCRM::Application.configure do
+if defined?(FatFreeCrm::Application)
+  FatFreeCrm::Application.configure do
     # Settings specified here will take precedence over those in config/application.rb
 
     # The test environment is used exclusively to run your application's
@@ -10,7 +10,7 @@ if defined?(FatFreeCRM::Application)
 
     # Configure static asset server for tests with Cache-Control for performance
     config.serve_static_assets = true
-    config.static_cache_control = "public, max-age=3600"
+    config.static_cache_control = 'public, max-age=3600'
 
     # Log error messages when you accidentally call methods on nil
     config.whiny_nils = true
@@ -39,7 +39,7 @@ if defined?(FatFreeCRM::Application)
     config.active_support.deprecation = :stderr
 
     # Set default host for mailer specs
-    config.action_mailer.default_url_options = { :host => "www.example.com" }
+    config.action_mailer.default_url_options = { :host => 'www.example.com'}
 
     # Speed up Devise tests
     config.stretches = 1

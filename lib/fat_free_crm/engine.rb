@@ -15,9 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module FatFreeCRM
+module FatFreeCrm
   class Engine < ::Rails::Engine
-    isolate_namespace FatFreeCRM
+    isolate_namespace FatFreeCrm
     engine_name 'fat_free_crm'
 
     config.autoload_paths += Dir[root.join("app/models/**")] +

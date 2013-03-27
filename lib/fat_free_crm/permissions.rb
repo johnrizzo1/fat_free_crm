@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module FatFreeCRM
+module FatFreeCrm
   module Permissions
 
     def self.included(base)
@@ -38,8 +38,8 @@ module FatFreeCRM
             accessible_by(User.current_ability)
           }
 
-          include FatFreeCRM::Permissions::InstanceMethods
-          extend  FatFreeCRM::Permissions::SingletonMethods
+          include FatFreeCrm::Permissions::InstanceMethods
+          extend  FatFreeCrm::Permissions::SingletonMethods
         end
       end
 
@@ -116,4 +116,4 @@ module FatFreeCRM
   end # Permissions
 end # FatFreeCRM
 
-ActiveRecord::Base.send(:include, FatFreeCRM::Permissions)
+ActiveRecord::Base.send(:include, FatFreeCrm::Permissions)

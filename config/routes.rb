@@ -1,24 +1,29 @@
-Rails.application.routes.draw do
+#Rails.application.routes.draw do
+FatFreeCrm::Application.routes.draw do
 
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions", :passwords => "passwords"}
+  devise_for :users,
+             :controllers => {
+                 :registrations => 'fat_free_crm/registrations',
+                 :sessions => 'fat_free_crm/sessions',
+                 :passwords => 'fat_free_crm/passwords'}
  
   devise_scope :user do
     resources :users, :only => [:index, :show]
-    get "login", :to => "sessions#new", :as => :new_user_session
-    get "logout", :to => "sessions#destroy", :as => :logout
-    get "signup", :to => "registrations#new"
-    post "signup", :to => "registrations#create", :as => :user_registration
-    get "passwords", :to => "passwords#new", :as => :new_user_password
-    post "passwords", :to => "passwords#create", :as => :user_password
+    get 'login', :to => 'fat_free_crm/sessions#new', :as => :new_user_session
+    get 'logout', :to => 'fat_free_crm/sessions#destroy', :as => :logout
+    get 'signup', :to => 'fat_free_crm/registrations#new'
+    post 'signup', :to => 'fat_free_crm/registrations#create', :as => :user_registration
+    get 'passwords', :to => 'fat_free_crm/passwords#new', :as => :new_user_password
+    post 'passwords', :to => 'fat_free_crm/passwords#create', :as => :user_password
   end
 
   resources :lists
 
-  root :to => 'home#index'
+  root :to => 'fat_free_crm/home#index'
 
-  match 'activities' => 'home#index'
-  match 'admin'      => 'admin/users#index',       :as => :admin
-  match 'profile'    => 'users#show',              :as => :profile
+  match 'activities' => 'fat_free_crm/home#index'
+  match 'admin'      => 'fat_free_crm/admin/users#index',       :as => :admin
+  match 'profile'    => 'fat_free_crm/users#show',              :as => :profile
 
   match '/home/options',  :as => :options
   match '/home/toggle',   :as => :toggle
@@ -27,6 +32,7 @@ Rails.application.routes.draw do
   match '/home/redraw',   :as => :redraw
 
   resources :comments
+
   resources :emails
 
   resources :accounts, :id => /\d+/ do
