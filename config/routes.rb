@@ -1,46 +1,41 @@
-Rails.application.routes.draw do
+FatFreeCrm::Engine.routes.draw do
+  #scope :module => 'fat_free_crm' do
 
-  devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions", :passwords => "passwords"}
- 
+  root :to => 'fat_free_crm/home#index'
+
+  devise_for :users,
+             :controllers => {
+                 :registrations => 'fat_free_crm/registrations',
+                 :sessions => 'fat_free_crm/sessions',
+                 :passwords => 'fat_free_crm/passwords'
+             }
+
   devise_scope :user do
     resources :users, :only => [:index, :show]
-    get "login", :to => "sessions#new", :as => :new_user_session
-    get "logout", :to => "sessions#destroy", :as => :logout
-    get "signup", :to => "registrations#new"
-    post "signup", :to => "registrations#create", :as => :user_registration
-    get "passwords", :to => "passwords#new", :as => :new_user_password
-    post "passwords", :to => "passwords#create", :as => :user_password
+    get 'login', :to => 'fat_free_crm/sessions#new', :as => :new_user_session
+    get 'logout', :to => 'fat_free_crm/sessions#destroy', :as => :logout
+    get 'signup', :to => 'fat_free_crm/registrations#new'
+    post 'signup', :to => 'fat_free_crm/registrations#create', :as => :user_registration
+    get 'passwords', :to => 'fat_free_crm/passwords#new', :as => :new_user_password
+    post 'passwords', :to => 'fat_free_crm/passwords#create', :as => :user_password
   end
 
   resources :lists
-
-  root :to => 'home#index'
-
-  match 'activities' => 'home#index'
-  match 'admin'      => 'admin/users#index',       :as => :admin
-  match 'profile'    => 'users#show',              :as => :profile
-
-  match '/home/options',  :as => :options
-  match '/home/toggle',   :as => :toggle
-  match '/home/timeline', :as => :timeline
-  match '/home/timezone', :as => :timezone
-  match '/home/redraw',   :as => :redraw
-
   resources :comments
   resources :emails
 
   resources :accounts, :id => /\d+/ do
     collection do
-      get  :advanced_search
+      get :advanced_search
       post :filter
-      get  :options
-      get  :field_group
+      get :options
+      get :field_group
       match :auto_complete
       post :redraw
       get :versions
     end
     member do
-      put  :attach
+      put :attach
       post :discard
       post :subscribe
       post :unsubscribe
@@ -51,16 +46,16 @@ Rails.application.routes.draw do
 
   resources :campaigns, :id => /\d+/ do
     collection do
-      get  :advanced_search
+      get :advanced_search
       post :filter
-      get  :options
-      get  :field_group
+      get :options
+      get :field_group
       post :auto_complete
       post :redraw
       get :versions
     end
     member do
-      put  :attach
+      put :attach
       post :discard
       post :subscribe
       post :unsubscribe
@@ -71,16 +66,16 @@ Rails.application.routes.draw do
 
   resources :contacts, :id => /\d+/ do
     collection do
-      get  :advanced_search
+      get :advanced_search
       post :filter
-      get  :options
-      get  :field_group
+      get :options
+      get :field_group
       post :auto_complete
       post :redraw
       get :versions
     end
     member do
-      put  :attach
+      put :attach
       post :discard
       post :subscribe
       post :unsubscribe
@@ -90,22 +85,22 @@ Rails.application.routes.draw do
 
   resources :leads, :id => /\d+/ do
     collection do
-      get  :advanced_search
+      get :advanced_search
       post :filter
-      get  :options
-      get  :field_group
+      get :options
+      get :field_group
       post :auto_complete
       post :redraw
       get :versions
     end
     member do
-      get  :convert
+      get :convert
       post :discard
       post :subscribe
       post :unsubscribe
-      put  :attach
-      put  :promote
-      put  :reject
+      put :attach
+      put :promote
+      put :reject
     end
 
     get :autocomplete_account_name, :on => :collection
@@ -113,16 +108,16 @@ Rails.application.routes.draw do
 
   resources :opportunities, :id => /\d+/ do
     collection do
-      get  :advanced_search
+      get :advanced_search
       post :filter
-      get  :options
-      get  :field_group
+      get :options
+      get :field_group
       post :auto_complete
       post :redraw
       get :versions
     end
     member do
-      put  :attach
+      put :attach
       post :discard
       post :subscribe
       post :unsubscribe
@@ -200,6 +195,8 @@ Rails.application.routes.draw do
     resources :settings
     resources :plugins
   end
+  #end
+
 
   get '/:controller/tagged/:id' => '#tagged'
 end

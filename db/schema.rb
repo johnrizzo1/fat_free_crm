@@ -13,6 +13,18 @@
 
 ActiveRecord::Schema.define(:version => 20121221033947) do
 
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.boolean  "private"
+    t.string   "title",                          :default => ""
+    t.text     "comment"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
+    t.string   "state",            :limit => 16, :default => "Expanded", :null => false
+  end
+
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
     t.integer  "contact_id"
@@ -61,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20121221033947) do
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
   end
-
   add_index "activities", ["created_at"], :name => "index_activities_on_created_at"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
@@ -119,18 +130,6 @@ ActiveRecord::Schema.define(:version => 20121221033947) do
 
   add_index "campaigns", ["assigned_to"], :name => "index_campaigns_on_assigned_to"
   add_index "campaigns", ["user_id", "name", "deleted_at"], :name => "index_campaigns_on_user_id_and_name_and_deleted_at", :unique => true
-
-  create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.boolean  "private"
-    t.string   "title",                          :default => ""
-    t.text     "comment"
-    t.datetime "created_at",                                             :null => false
-    t.datetime "updated_at",                                             :null => false
-    t.string   "state",            :limit => 16, :default => "Expanded", :null => false
-  end
 
   create_table "contact_opportunities", :force => true do |t|
     t.integer  "contact_id"

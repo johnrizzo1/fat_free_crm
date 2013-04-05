@@ -1,0 +1,3 @@
+module FatFreeCrm::Admin
+
+end

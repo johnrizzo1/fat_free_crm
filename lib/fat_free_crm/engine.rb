@@ -15,16 +15,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module FatFreeCRM
+module FatFreeCrm
   class Engine < ::Rails::Engine
-    isolate_namespace FatFreeCRM
+    isolate_namespace FatFreeCrm
     engine_name 'fat_free_crm'
 
-    config.autoload_paths += Dir[root.join("app/models/**")] +
-                             Dir[root.join("app/controllers/entities")]
+    config.autoload_paths += Dir[root.join('app/models/**')] +
+        Dir[root.join('app/controllers/fat_free_crm/entities')]
+
+    config.autoload_paths += %W(#{config.root}/lib)
 
     config.to_prepare do
-      ActiveRecord::Base.observers = :lead_observer, :opportunity_observer, :task_observer
+      #ActiveRecord::Base.observers = :lead_observer, :opportunity_observer, :task_observer
+      ActiveRecord::Base.observers = 'fat_free_crm/lead_observer',
+          'fat_free_crm/opportunity_observer',
+          'fat_free_crm/task_observer'
     end
   end
 end

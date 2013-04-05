@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #------------------------------------------------------------------------------
 
-module FatFreeCRM
+#module FatFreeCrm
   module I18n
 
     #----------------------------------------------------------------------------
@@ -45,7 +45,7 @@ module FatFreeCRM
       @@languages ||= Hash[ locales.map{ |locale| [ locale, t(:language, :locale => locale) ] } ]
     end
   end
-end
+#end
 
-ActionView::Base.send(:include, FatFreeCRM::I18n)
-ActionController::Base.send(:include, FatFreeCRM::I18n)
+ActionView::Base.send(:include, I18n)
+ActionController::Base.send(:include, I18n)

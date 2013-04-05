@@ -13,22 +13,26 @@ end
 # Override Rails Engines so that plugins have higher priority than the Application
 require 'fat_free_crm/gem_ext/rails/engine'
 
-module FatFreeCRM
+module FatFreeCrm
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Models are organized in sub-directories
-    config.autoload_paths += Dir[Rails.root.join("app/models/**")] +                                                                 
-                             Dir[Rails.root.join("app/controllers/entities")]
+    config.autoload_paths += Dir[Rails.root.join('app/models/**')] +
+                             Dir[Rails.root.join('app/controllers/fat_free_crm/entities')]
     
     # Prevent Field class from being reloading more than once as this clears registered customfields
-    config.autoload_once_paths += [File.expand_path("../app/models/fields/field.rb", __FILE__)]
+    config.autoload_once_paths += [File.expand_path('../app/models/fat_free_crm/field.rb', __FILE__)]
 
     # Activate observers that should always be running.
     unless ARGV.join.include?('assets:precompile')
-      config.active_record.observers = :lead_observer, :opportunity_observer, :task_observer, :entity_observer
+      config.active_record.observers =
+          'fat_free_crm/lead_observer',         # :lead_observer,
+          'fat_free_crm/opportunity_observer',  # :opportunity_observer,
+          'fat_free_crm/task_observer',         # :task_observer,
+          'fat_free_crm/entity_observer'       # :entity_observer
     end
 
     # Load development rake tasks (RSpec, Gem packaging, etc.)
@@ -54,7 +58,7 @@ module FatFreeCRM
     # config.i18n.default_locale = :de
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
@@ -79,8 +83,10 @@ module FatFreeCRM
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
+
+  # Require fat_free_crm after FatFreeCrm::Application class is defined,
+  # so that FatFreeCrm::Engine is skipped.
+  require 'fat_free_crm'
 end
 
-# Require fat_free_crm after FatFreeCRM::Application class is defined,
-# so that FatFreeCRM::Engine is skipped.
-require 'fat_free_crm'
+

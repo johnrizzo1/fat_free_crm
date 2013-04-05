@@ -17,5 +17,6 @@
 
 # Custom fields need to be loaded so they register their availability
 #------------------------------------------------------------------------------
-custom_field_path = File.join(File.dirname(__FILE__), '..', '..', 'app', 'models', 'fields', 'custom_field_*')
+custom_field_path = File.join(File.dirname(__FILE__),
+                              '..', '..', 'app', 'models', 'fat_free_crm', 'custom_field_*')
 Dir[custom_field_path].each {|f| require f}
